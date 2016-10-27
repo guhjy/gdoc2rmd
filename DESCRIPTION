@@ -1,0 +1,24 @@
+Package: gdoc2rmd
+Type: Package
+Title: Convert Google Doc HTML Files to Rmarkdown
+Version: 0.1.0
+Authors@R: c(person("Jacob", "Malcom",
+                    email = "jmalcom@defenders.org",
+                    role = c("aut", "cre")))
+Description: Google Docs allows users to export their document as an HTML file.
+    The raw HTML is rather complex, the styling is pretty weak, and there are
+    limited choices for how to incorporate R tools with the plain HTML. This
+    packages converts the GDoc HTML version to Rmarkdown, suitable for further
+    editing.
+Depends:
+    R (>= 3.2.3)
+License: BSD_2_clause + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Imports:
+    dplyr,
+    htmltidy,
+    rvest,
+    stringr,
+    xml2
