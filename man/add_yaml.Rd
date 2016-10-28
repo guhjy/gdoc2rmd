@@ -23,7 +23,7 @@ Add rmarkdown YAML front-matter to markdown doc
 Rmarkdown documents require a YAML header to describe output types
 and options. This function adds the basic header:
 
-\code{---
+\preformatted{---
 output:
   html_document:
     css: <path/to/css>

@@ -5,7 +5,7 @@
 #' @details Rmarkdown documents require a YAML header to describe output types
 #' and options. This function adds the basic header:
 #'
-#' \code{---
+#' \preformatted{---
 #' output:
 #'   html_document:
 #'     css: <path/to/css>
@@ -13,8 +13,8 @@
 #'     toc_float: true
 #' ---}
 #'
-#' Users may supply their own YAML header, but must correctly specify the
-#' (absolute) path to the CSS file.
+#' where <path/to/css> is added using \code{sprintf}. Users may supply their own
+#' YAML header, but must correctly specify the (absolute) path to the CSS file.
 #'
 #' @param doc The markdown document to append to YAML
 #' @param css Path to CSS file to be included during knitting
