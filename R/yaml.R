@@ -26,9 +26,9 @@ add_yaml <- function(doc, css = NULL, yml = NULL) {
     yml <- sprintf("---
 output:
   html_document:
-    css: %s
     toc: true
     toc_float: true
+    css: [ %s, '']
 ---
 ", css)
   }
