@@ -7,8 +7,7 @@
 #' if \code{length(doc) == 1} and splits on newlines to create the vector.
 #'
 #' @param doc An object representation of an html file
-#' @return A list with the <head> and <body> of \code{doc}
-#' @seealso if any see alsos
+#' @return A list with the <head> ($head) and <body> ($body) of \code{doc}
 #' @importFrom stringr str_split
 #' @export
 #' @examples

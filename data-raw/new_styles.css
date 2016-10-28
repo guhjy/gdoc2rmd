@@ -1,0 +1,94 @@
+/* BSD_2_clause */
+
+/* Override defaults for class attrs */
+li {
+  color: #000000;
+  font-size: large;
+  font-family: "Garamond";
+  padding-left: 20px;
+}
+
+ol {
+  padding-left: 40px;
+}
+
+p {
+  margin: 0;
+  color: #000000;
+  font-size: large;
+  font-family: "Garamond";
+  padding-bottom: 10pt;
+}
+
+span {
+  margin: 0;
+  color: #000000;
+  font-size: inherit;
+  font-family: "Garamond";
+  padding-bottom: 10pt;
+}
+
+h1 {
+  padding: 0;
+  color: #000000;
+  font-weight: 700;
+  font-size: 20pt;
+  font-family: "Open Sans";
+  line-height: 1.2;
+  text-align: left
+}
+
+h2 {
+  padding-top: 0pt;
+  color: #000000;
+  font-weight: 700;
+  font-size: 16pt;
+  font-family: "Open Sans";
+  line-height: 1.2;
+  font-style: italic;
+  text-align: left
+}
+
+h3 {
+  padding-top: 12pt;
+  color: #000000;
+  text-decoration: underline;
+  font-size: 12pt;
+  padding-bottom: 2pt;
+  font-family: "Garamond";
+  line-height: 1.2;
+  font-style: italic;
+  text-align: left
+}
+
+h4 {
+  padding-top: 12pt;
+  color: #000000;
+  text-decoration: underline;
+  font-size: 10pt;
+  padding-bottom: 2pt;
+  font-family: "Open Sans";
+  line-height: 1.2;
+  font-style: italic;
+  text-align: left
+}
+
+h5 {
+  padding-top: 0pt;
+  color: #000000;
+  font-size: 10pt;
+  padding-bottom: 10pt;
+  font-family: "Source Code Pro";
+  line-height: 1.2;
+  text-align: left
+}
+
+h6 {
+  padding-top: 0pt;
+  color: #000000;
+  font-size: 12pt;
+  padding-bottom: 10pt;
+  font-family: "Garamond";
+  line-height: 1.2;
+  text-align: left
+}

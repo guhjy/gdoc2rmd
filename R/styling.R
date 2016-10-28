@@ -1,19 +1,60 @@
 # BSD_2_clause
 
-get_css <- function(txt) {
-  h1 <- read_html(txt)
-  h2 <- html_text(html_nodes(h1, "style"))
-  h3 <- remove_at_import(h2)
-  h4 <- wrap_css(h3)
-  h5 <- add_styles(h4)
-  return(h5)
+#' Update the CSS from GDoc HTML
+#'
+#' A wrapper to: extract the CSS from a Google Docs HTML export; remove the
+#' \@import GDocs contain; wrap the extracted (inline) CSS; and add style
+#' revisions
+#'
+#' @param txt An HTML <head> character vector
+#' @param no_import Remove the google \@import statement from CSS? (TRUE)
+#' @param wrap_css Wrap CSS for pretty-printing? (TRUE)
+#' @param add_style Add new styles with \link{add_styles}? (TRUE)
+#' @return CSS character string
+#' @seealso \link{update_css}
+#' @import xml2 rvest
+#' @export
+update_css <- function(txt,
+                       no_import = TRUE,
+                       wrap_css = TRUE,
+                       add_style = TRUE) {
+  css <- get_css(txt)
+  if(no_import) css <- remove_at_import(css)
+  if(wrap_css) css <- wrap_css(css)
+  if(add_style) css <- add_styles(css)
+  return(css)
 }
 
+#' Extract the <style> from HTML text
+#'
+#' @param txt An HTML <head> character vector
+#' @return CSS character string
+#' @seealso \link{update_css}
+#' @import xml2 rvest
+#' @export
+get_css <- function(txt) {
+  h1 <- xml2::read_html(txt)
+  css <- rvest::html_text(rvest::html_nodes(h1, "style"))
+  return(css)
+}
+
+#' Remove google's \@import line from <style>
+#'
+#' @param css The CSS from which the import is stripped
+#' @return The clean CSS
+#' @importFrom stringr str_replace
+#' @export
 remove_at_import <- function(css) {
   cln <- str_replace(css, pattern = "[ ]{0,2}@import url\\(.*\\);", "")
   return(cln)
 }
 
+#' Wrap CSS for pretty-printing
+#'
+#' @param css The (inlined) CSS to be wrapped
+#' @return The wrapped CSS
+#' @importFrom stringr str_replace_all
+#' @export
 wrap_css <- function(css) {
   cln <- str_replace_all(css, pattern = "\\{", " {\n    ")
   cln <- str_replace_all(cln, pattern = "\\}", "\n}\n\n")
@@ -21,100 +62,19 @@ wrap_css <- function(css) {
   return(cln)
 }
 
-add_styles <- function(css) {
-  more_style <- '
-  /* Override defaults for attrs */
-  li {
-  color: #000000;
-  font-size: large;
-  font-family: "Garamond";
-  padding-left: 20px;
+#' Append new styles to CSS
+#'
+#' The default new styles are internal data (new_styles in R/sysdata.rda), but
+#' \code{new_css} can be specified for users to append their own CSS.
+#'
+#' @param css The CSS to which new_styles or new_css will be added
+#' @return Updated \code{css} with new styles appended
+#' @seealso if any see alsos
+#' @export
+add_styles <- function(css, new_css = NULL) {
+  if(is.null(new_css)) {
+    return(paste(css, new_styles, sep = "\n"))
+  } else {
+    return(paste(css, new_css, sep = "\n"))
   }
-
-  ol {
-  padding-left: 40px;
-  }
-
-  p {
-  margin: 0;
-  color: #000000;
-  font-size: large;
-  font-family: "Garamond";
-  padding-bottom: 10pt;
-  }
-
-  span {
-  margin: 0;
-  color: #000000;
-  font-size: inherit;
-  font-family: "Garamond";
-  padding-bottom: 10pt;
-  }
-
-  h1 {
-  padding: 0;
-  color: #000000;
-  font-weight: 700;
-  font-size: 20pt;
-  font-family: "Open Sans";
-  line-height: 1.2;
-  text-align: left
-  }
-
-  h2 {
-  padding-top: 0pt;
-  color: #000000;
-  font-weight: 700;
-  font-size: 16pt;
-  font-family: "Open Sans";
-  line-height: 1.2;
-  font-style: italic;
-  text-align: left
-  }
-
-  h3 {
-  padding-top: 12pt;
-  color: #000000;
-  text-decoration: underline;
-  font-size: 12pt;
-  padding-bottom: 2pt;
-  font-family: "Garamond";
-  line-height: 1.2;
-  font-style: italic;
-  text-align: left
-  }
-
-  h4 {
-  padding-top: 12pt;
-  color: #000000;
-  text-decoration: underline;
-  font-size: 10pt;
-  padding-bottom: 2pt;
-  font-family: "Open Sans";
-  line-height: 1.2;
-  font-style: italic;
-  text-align: left
-  }
-
-  h5 {
-  padding-top: 0pt;
-  color: #000000;
-  font-size: 10pt;
-  padding-bottom: 10pt;
-  font-family: "Source Code Pro";
-  line-height: 1.2;
-  text-align: left
-  }
-
-  h6 {
-  padding-top: 0pt;
-  color: #000000;
-  font-size: 12pt;
-  padding-bottom: 10pt;
-  font-family: "Garamond";
-  line-height: 1.2;
-  text-align: left
-  }
-  '
-  return(paste(css, more_style, sep = "\n"))
 }
