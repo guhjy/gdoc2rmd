@@ -2,8 +2,8 @@
 
 #' Un-escape square brackets
 #'
-#' Pandoc escapes square brackets in the HTML-md conversion, which makes the
-#' Rmarkdown invalid.
+#' Pandoc escapes square brackets in the HTML:md conversion, which makes the
+#' Rmarkdown invalid. This function un-escapes the brackets.
 #'
 #' @param doc The markdown text to be cleaned
 #' @return A clean version of doc

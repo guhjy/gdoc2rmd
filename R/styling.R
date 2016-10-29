@@ -78,3 +78,36 @@ add_styles <- function(css, new_css = NULL) {
     return(paste(css, new_css, sep = "\n"))
   }
 }
+
+#' Use 'new_styles.css' from system.file
+#'
+#' The internal data 'new_styles' includes formatting for the major HTML
+#' attributes, e.g., p, h1-6, li, ol. This data may included in, e.g.,
+#' \link{add_default_yaml}.
+#'
+#' @return Path to the system.file new_styles.css
+#' @seealso \link{write_example_css}
+#' @export
+use_example_css <- function() {
+  system.file("extdata", "new_styles.css", package = "gdoc2rmd")
+}
+
+#' Write 'new_styles' CSS to file
+#'
+#' The internal data 'new_styles' includes formatting for the major HTML
+#' attributes, e.g., p, h1-6, li, ol. This data may be written to file, modified,
+#' and then included in, e.g., \link{add_default_yaml}.
+#'
+#' @param path The path to which the CSS will be written
+#' @return None
+#' @seealso \link{write_bootstrap_css}
+#' @export
+write_example_css <- function(path) {
+  style_file <- use_example_css()
+  res <- try(file.copy(style_file, path), silent = TRUE)
+  if(class(res) != "try-error") {
+    message(paste("Example CSS written to", path))
+  } else {
+    message(paste("Problem writing the example CSS", res))
+  }
+}

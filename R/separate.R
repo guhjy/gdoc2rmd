@@ -5,6 +5,7 @@
 #' This function works line-wise to separate the <head> from the <body>,
 #' so using, e.g., \code{readLines(infile)} as the input is suitable. Checks
 #' if \code{length(doc) == 1} and splits on newlines to create the vector.
+#' Excludes the <html> and </html> tags.
 #'
 #' @param doc An object representation of an html file
 #' @return A list with the <head> ($head) and <body> ($body) of \code{doc}

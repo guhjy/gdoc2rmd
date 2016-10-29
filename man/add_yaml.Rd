@@ -4,34 +4,41 @@
 \alias{add_yaml}
 \title{Add rmarkdown YAML front-matter to markdown doc}
 \usage{
-add_yaml(doc, css = NULL, yml = NULL)
+add_yaml(doc, theme = "default", styles = list(), shiny = FALSE,
+  yml = NULL)
 }
 \arguments{
 \item{doc}{The markdown document to append to YAML}
 
-\item{css}{Path to CSS file to be included during knitting}
+\item{theme}{A Bootswatch theme (see \url{http://bootswatch.com}) ["default"]}
 
-\item{yml}{Optional user-supplied YAML frontmatter (NULL)}
+\item{styles}{List of paths to one or more CSS style sheets}
+
+\item{shiny}{Whether to use the Shiny runtime [FALSE]}
+
+\item{yml}{Optional user-supplied YAML frontmatter [NULL]}
 }
 \value{
-A base rmarkdown version of markdown \code{doc}
+An Rmarkdown version of \code{doc} with a YAML header
 }
 \description{
 Add rmarkdown YAML front-matter to markdown doc
 }
 \details{
-Rmarkdown documents require a YAML header to describe output types
-and options. This function adds the basic header:
+Rmarkdown documents take a YAML header to describe output options.
+This function adds the basic header:
 
 \preformatted{---
 output:
   html_document:
-    css: <path/to/css>
     toc: true
     toc_float: true
+    css: [path/to/css1, path/to/css2]
 ---}
 
-Users may supply their own YAML header, but must correctly specify the
-(absolute) path to the CSS file.
+Users may supply any CSS they wish; an example is provided with
+\link{use_example_css} (and write with \link{write_example_css}. Users may
+supply their own YAML header, but must #' correctly specify the (absolute)
+path to the CSS file.
 }
 

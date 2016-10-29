@@ -13,8 +13,8 @@ clean_brackets(doc)
 A clean version of doc
 }
 \description{
-Pandoc escapes square brackets in the HTML-md conversion, which makes the
-Rmarkdown invalid.
+Pandoc escapes square brackets in the HTML:md conversion, which makes the
+Rmarkdown invalid. This function un-escapes the brackets.
 }
 \examples{
 \dontrun{

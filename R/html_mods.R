@@ -26,32 +26,36 @@
 #' @export
 #' @examples
 #' html <- <p class="newstyle">This is a p-element.</p>
-#' pelem_conv(html)
-pelem_conv <- function(html) {
+#' convert_pelements(html)
+convert_pelements <- function(html) {
   t1 <- stringr::str_replace_all(html, "<p class", "<p><div class")
   t2 <- stringr::str_replace_all(t1, "</p>", "</div></p>")
   return(t2)
 }
 
-#' Very specific string sub for our demo
+#' Replace a specific string to reflect medium change
+#'
+#' The string we are using is "This Google Doc", which is replaced with "This
+#' page was written with Google Docs and converted using the `gdoc2rmd` R
+#' package. It".
 #'
 #' @param html The HTML to be searched and sub'd
 #' @return An updated form of \code{html}
 #' @importFrom stringr str_replace
 #' @export
-update_gdoc_statement <- function(html) {
+replace_gdoc_statement <- function(html) {
   replace <- paste("This page was written with Google Docs and converted",
                    "using the `gdoc2rmd` R package. It")
   new <- str_replace(html, "This Google Doc", replace)
   return(new)
 }
 
-#' Upate the GDoc title for proper formatting
+#' Upate the GDoc title <span> for proper formatting
 #'
 #' @param html The HTML to be searched and sub'd
 #' @return An updated form of \code{html}
 #' @export
-fix_title_span <- function(html) {
+replace_title_span <- function(html) {
   splt <- str_split(html, "\n")[[1]]
   offend <- grep(splt, pattern = "class=\"[ ]{0,1}title\"")
   splt[offend + 2] <- gsub(splt[offend + 2], pattern = "span", replacement = "div")
@@ -63,7 +67,7 @@ fix_title_span <- function(html) {
 #' @param html The HTML to be searched and sub'd
 #' @return An updated form of \code{html}
 #' @export
-fix_html_escapes <- function(txt) {
+replace_html_escapes <- function(txt) {
   txt <- str_replace_all(txt, "%3D", "=")
   txt <- str_replace_all(txt, "%2520", "%20")
   return(txt)
@@ -74,7 +78,7 @@ fix_html_escapes <- function(txt) {
 #' @param html The HTML to be searched and sub'd
 #' @return An updated form of \code{html}
 #' @export
-remove_empties <- function(txt) {
+replace_empty_headings <- function(txt) {
   cln <- str_replace_all(txt, "<h[1-6] class=\".*\" id=\".*\"></h[1-6]>\n", "")
   return(cln)
 }
